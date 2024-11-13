@@ -1,0 +1,108 @@
+###Service document
+http://localhost:4004/odata/v4/CatalogService
+ 
+###Service metadata document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+ 
+###Get all the employee data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+ 
+###Get all the employee data - ID, NameFirst, nameLast
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,nameLast
+
+###Get all currencies
+http://localhost:4004/odata/v4/CatalogService/Currencies
+
+###Get all product data
+http://localhost:4004/odata/v4/CatalogService/ProductSet
+
+###Pagination - load data chunk by chunk
+http://localhost:4004/odata/v4/CatalogService/ProductSet?$top=2&$skip=2
+
+###Filtering - search and filter data
+http://localhost:4004/odata/v4/CatalogService/ProductSet?$filter=CURRENCY_CODE eq 'EUR'
+
+###Pattern match search
+http://localhost:4004/odata/v4/CatalogService/ProductSet?$filter=contains(CATEGORY,'te')
+
+###Get Single employee data by Id
+http://localhost:4004/odata/v4/CatalogService/ProductSet/74867AD200E41EDBA5D8B06B26EB4052
+
+###Count the records
+http://localhost:4004/odata/v4/CatalogService/ProductSet/$count
+
+###Sort data
+http://localhost:4004/odata/v4/CatalogService/ProductSet?$orderby=PRODUCT_ID&$top=5
+
+###Insert data inside DB - POST operation
+POST http://localhost:4004/odata/v4/CatalogService/ProductSet
+Content-Type: application/json
+ 
+{
+      "NODE_KEY": "74867AD200E41EDBA5D8B06B26EB8053",
+      "PRODUCT_ID": "MI-5000",
+      "TYPE_CODE": "PR",
+      "CATEGORY": "thinkpads",
+      "DESCRIPTION": "thinkpad Basic 15 with 2,80 GHz quad core, 15\" LCD, 4 GB DDR3 RAM, 500 GB Hard Disc, Windows 8 Pro                                                                                                                                                             ",
+      "SUPPLIER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885AB2052",
+      "TAX_TARIF_CODE": 1,
+      "MEASURE_UNIT": "EA",
+      "WEIGHT_MEASURE": 4.2,
+      "WEIGHT_UNIT": "KG",
+      "CURRENCY_CODE": "USD",
+      "PRICE": 956,
+      "WIDTH": 30,
+      "DEPTH": 18,
+      "HEIGHT": 3,
+      "DIM_UNIT": "CM"
+}
+
+###Get the data of created employee
+http://localhost:4004/odata/v4/CatalogService/ProductSet/74867AD200E41EDBA5D8B06B26EB8053
+
+###Update the data - Patch
+PATCH http://localhost:4004/odata/v4/CatalogService/ProductSet/74867AD200E41EDBA5D8B06B26EB8053
+Content-Type: application/json
+ 
+{
+    "PRICE": 555
+}
+
+###Remove data - DELETE
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/74867AD200E41EDBA5D8B06B26EB8053
+
+###Get All Po
+http://localhost:4004/odata/v4/CatalogService/POs
+
+###Get Single Order by Id
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC32052
+
+###Association - get the items correspoding for single order
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC32052/Items
+
+###Association - get the header and item data together
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC32052?$expand=Items
+
+###Get data from cds view entity
+http://localhost:4004/odata/v4/CatalogService/CProductValuesView
+
+
+###Update the data - Patch
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+Content-Type: application/json
+ 
+{
+    "salaryAmount": 1000001
+}
+
+###Calling boost action
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC32052/boost
+Content-Type: application/json
+ 
+{}
+
+###Get the largest order
+http://localhost:4004/odata/v4/CatalogService/largestOrder()
+
+###Get Custom entity data
+http://localhost:4004/odata/v4/MyService/EmployeeSrv
